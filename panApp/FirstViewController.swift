@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  FirstViewController.swift
 //  panApp
 //
 //  Created by smd on 2020/08/18.
@@ -61,7 +61,6 @@ class FirstViewController: UIViewController {
             cFLAG = true
             imageView.isHidden = false
         }
-        
        }
     
     override func touchesEnded(_ touches: Set<UITouch>, with
