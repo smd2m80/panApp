@@ -12,7 +12,7 @@ import CoreMotion
 import simd
 
 
-class SecondViewController: UIViewController, WKUIDelegate, UIGestureRecognizerDelegate {
+class SecondViewController: UIViewController, WKUIDelegate {
 
     var webView: WKWebView!
     
@@ -38,13 +38,14 @@ class SecondViewController: UIViewController, WKUIDelegate, UIGestureRecognizerD
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         
-        // tapセンサー
-        let tapGesture:UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(SecondViewController.tapped(_:)))
+        // UITapGestureRecognizerでタップイベントを取るようにする
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        tapRecognizer.numberOfTapsRequired = 1
+
         // このときUIGestureRecognizerDelegateに準拠したオブジェクトを設定する
-        tapGesture.delegate = self
-        webView.addGestureRecognizer(tapGesture)
+        tapRecognizer.delegate = self
+        webView.addGestureRecognizer(tapRecognizer)
+        
     }
     
     func startSensorUpdates(intervalSeconds:Double) {
@@ -75,26 +76,24 @@ class SecondViewController: UIViewController, WKUIDelegate, UIGestureRecognizerD
 //        }
 //
 //    }
+    
+    @objc private func handleTap(_ sender: UITapGestureRecognizer){
+//        NSLog("Tap")
+        
+        let accZ200msMin = accZ.suffix(20).min() ?? 0
+                    print(accZ200msMin)
 
-    @objc func tapped(_ sender: UITapGestureRecognizer){
-        print("tap catch")
-        if sender.state == .ended {
-            
-            print("Ttap")
-            
-            let accZ200msMin = accZ.suffix(10).min() ?? 0
-                        print(accZ.suffix(20))
-
-                        if (accZ200msMin < -0.15){
-                            print("touch")
-                            let activeUrl: URL? = self.webView.url
-                            let url = activeUrl?.absoluteString
-                            print(url!)
-                            alert(title: "コピーしました", message: "")
-            }
+                    if (accZ200msMin < -0.15){
+                        let activeUrl: URL? = self.webView.url
+                        let url = activeUrl?.absoluteString
+//                        print(url!)
+                        UIPasteboard.general.string = url
+//                        alert(title: "コピーしました", message: "")
         }
     }
     
+    
+
     //アラート
     func alert(title: String, message: String)  {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -105,3 +104,13 @@ class SecondViewController: UIViewController, WKUIDelegate, UIGestureRecognizerD
     
 }
 
+
+extension SecondViewController: UIGestureRecognizerDelegate {
+
+    // MARK: UIGestureRecognizerDelegate
+
+    // このgestureRecognizerをオーバーライドしてtrueにしないとサブビューではTapイベントを検知できない
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
