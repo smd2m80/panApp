@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		9F4D549C24ECCFFF008449F9 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4D549B24ECCFFF008449F9 /* ThirdViewController.swift */; };
+		9F76C8D02512E652004C7FCC /* swiftML in Frameworks */ = {isa = PBXBuildFile; productRef = 9F76C8CF2512E652004C7FCC /* swiftML */; };
 		9F7BCC6A24EB55E50020961B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7BCC6924EB55E50020961B /* AppDelegate.swift */; };
 		9F7BCC6C24EB55E50020961B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7BCC6B24EB55E50020961B /* SceneDelegate.swift */; };
 		9F7BCC6E24EB55E50020961B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7BCC6D24EB55E50020961B /* SecondViewController.swift */; };
@@ -60,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F76C8D02512E652004C7FCC /* swiftML in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +152,9 @@
 			dependencies = (
 			);
 			name = panApp;
+			packageProductDependencies = (
+				9F76C8CF2512E652004C7FCC /* swiftML */,
+			);
 			productName = panApp;
 			productReference = 9F7BCC6624EB55E50020961B /* panApp.app */;
 			productType = "com.apple.product-type.application";
@@ -222,6 +227,9 @@
 				Base,
 			);
 			mainGroup = 9F7BCC5D24EB55E50020961B;
+			packageReferences = (
+				9F76C8CE2512E652004C7FCC /* XCRemoteSwiftPackageReference "swiftML" */,
+			);
 			productRefGroup = 9F7BCC6724EB55E50020961B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -600,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9F76C8CE2512E652004C7FCC /* XCRemoteSwiftPackageReference "swiftML" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/param087/swiftML";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9F76C8CF2512E652004C7FCC /* swiftML */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F76C8CE2512E652004C7FCC /* XCRemoteSwiftPackageReference "swiftML" */;
+			productName = swiftML;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9F7BCC5E24EB55E50020961B /* Project object */;
 }

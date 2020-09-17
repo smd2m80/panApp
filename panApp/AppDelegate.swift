@@ -9,12 +9,33 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        UNUserNotificationCenter.current()
+        .requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { (granted, error) in
+            // 許可されない場合は、アプリを終了する
+            if !granted {
+                let alert = UIAlertController(
+                    title: "エラー",
+                    message: "プッシュ通知が拒否されています。設定から有効にしてください。",
+                    preferredStyle: .alert
+                )
+                
+                // 終了処理
+                let closeAction = UIAlertAction(title: "閉じる", style: .default) { _ in exit(1) }
+                alert.addAction(closeAction)
+                
+                // ダイアログを表示
+                self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
+        })
+        
+        UNUserNotificationCenter.current().delegate = self
+        
         return true
     }
 

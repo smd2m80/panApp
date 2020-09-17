@@ -81,14 +81,15 @@ class SecondViewController: UIViewController, WKUIDelegate {
 //        NSLog("Tap")
         
         let accZ200msMin = accZ.suffix(20).min() ?? 0
-                    print(accZ200msMin)
-
-                    if (accZ200msMin < -0.15){
-                        let activeUrl: URL? = self.webView.url
-                        let url = activeUrl?.absoluteString
+        print(accZ200msMin)
+        
+        if (accZ200msMin < -0.15){
+            let activeUrl: URL? = self.webView.url
+            let url = activeUrl?.absoluteString
 //                        print(url!)
-                        UIPasteboard.general.string = url
-//                        alert(title: "コピーしました", message: "")
+            UIPasteboard.general.string = url
+            alert(title: "リンクをコピーしました", message: "")
+            
         }
     }
     
@@ -114,3 +115,4 @@ extension SecondViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
