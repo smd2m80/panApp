@@ -12,7 +12,7 @@ import simd
 
 class ThirdViewController: UIViewController {
 
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: ToucheEventTextView!
     
     let motionManager = CMMotionManager()
     var attitude : [CMAttitude] = []
@@ -24,7 +24,7 @@ class ThirdViewController: UIViewController {
         super.viewDidLoad()
         
         startSensorUpdates(intervalSeconds: 0.01) // 100Hz
-
+        textView.isEditable = false
     }
     
 
@@ -60,9 +60,10 @@ class ThirdViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //           let touch = touches.first!
         let accZ200msMin = accZ.suffix(10).min() ?? 0
-        print(accZ.suffix(20))
-
-        if (accZ200msMin < -0.15){
+//        print(accZ.suffix(20))
+        print(accZ200msMin)
+        
+        if (accZ200msMin > 0){
             cFLAG = true
         }else{
             cFLAG = false
