@@ -12,6 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
 
+    var screenWidth: CGFloat!
+    var screenHeight: CGFloat!
+    var safeAreaTop: CGFloat!
+    var safeAreaBottom: CGFloat!
+    var safeAreaLeft: CGFloat!
+    var safeAreaRight: CGFloat!
+    var safeAreaHeight: CGFloat!
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
